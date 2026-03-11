@@ -18,13 +18,13 @@ WING Multichannel Tracks Extractor — extracts individual WAV tracks from Behri
 ```bash
 git clone https://github.com/yourname/wing-extractor.git
 cd wing-extractor
-chmod +x wing_tracks_extract_v2.1.command
+chmod +x wing_tracks_extract.command
 ```
 
 ## Usage
 
 ```bash
-./wing_tracks_extract_v2.1.command -i /Volumes/SD/X_LIVE -o ~/Sessions/2025-01-31 -c 1
+./wing_tracks_extract.command -i /Volumes/SD/X_LIVE -o ~/Sessions/2025-01-31 -c 1
 ```
 
 **Flags:**
@@ -44,13 +44,13 @@ chmod +x wing_tracks_extract_v2.1.command
 
 ```bash
 # Card 1, custom ffmpeg path
-./wing_tracks_extract_v2.1.command -i /Volumes/SD/X_LIVE -o ~/out -c 1 -f /usr/local/bin
+./wing_tracks_extract.command -i /Volumes/SD/X_LIVE -o ~/out -c 1 -f /usr/local/bin
 
 # Card 2, extract only channels 1-8
-./wing_tracks_extract_v2.1.command -i /Volumes/SD/X_LIVE -o ~/out -c 2 -s 1-8
+./wing_tracks_extract.command -i /Volumes/SD/X_LIVE -o ~/out -c 2 -s 1-8
 
 # Dry run to verify track map before extracting
-./wing_tracks_extract_v2.1.command -i /Volumes/SD/X_LIVE -o ~/out -c 1 --dry-run
+./wing_tracks_extract.command -i /Volumes/SD/X_LIVE -o ~/out -c 1 --dry-run
 ```
 
 Double-clicking the `.command` file in Finder shows usage and opens a shell.
@@ -58,7 +58,7 @@ Double-clicking the `.command` file in Finder shows usage and opens a shell.
 ## tracks.txt
 
 One track name per line, in channel order. Lines starting with `#` are ignored.
-Place `tracks.txt` in the same directory as the script or provide full path.
+Place `tracks.txt` in the same directory as the script or provide full path and file name.
 
 ```
 # Drums
