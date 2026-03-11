@@ -1,0 +1,24 @@
+# My sample (tracks 1 - 22)
+Kick
+Snare
+Perc
+HH
+OH.L
+OH.R
+# Bass D.I.
+Bass
+AcGTR
+Key.L
+Key.R
+Unused
+Voc1
+Voc2
+Voc_Guest
+Unused
+Unused
+Spare
+Click
+AMB.L
+AMB.R
+MIX.L
+MIX.R
