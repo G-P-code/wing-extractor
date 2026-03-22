@@ -440,16 +440,7 @@ for CURRENT_INPUT_DIR in "${SELECTED_DIRS[@]}"; do
         mkdir -p "$OUT_REC_DIR"
     fi
 
-    if [ "$DRY_RUN" -eq 0 ] && [ -d "$OUT_REC_DIR" ]; then
-        existing=$(find "$OUT_REC_DIR" -maxdepth 1 -type f -iname "*.wav" 2>/dev/null | wc -l | tr -d ' ')
-        if [ "$existing" -gt 0 ]; then
-            echo
-            echo -e "${RED}Output folder already contains ${NC}$existing${RED} WAV file(s): \n${NC}$OUT_REC_DIR"
-            echo -en "\n${YELLOW}Overwrite? ${GRAY}[${GREEN}Y${GRAY}/${NC}n${GRAY}]${YELLOW}:${NC} "
-            read -r -n1 ans; echo
-            case "$ans" in [nN]) echo -e "${GRAY}  Skipping $REC_NAME${NC}"; continue ;; esac
-        fi
-    fi
+
 
     echo
     echo -e "${CYAN}============================================"
@@ -647,6 +638,19 @@ for CURRENT_INPUT_DIR in "${SELECTED_DIRS[@]}"; do
         if [ -z "$FILTER" ]; then
             echo -e "${YELLOW}  Warning:${NC} no channels selected for extraction"
             continue
+        fi
+
+        # Check if any output files from this recording already exist
+        _conflicts=0
+        for _arg in "${MAPS[@]}"; do
+            case "$_arg" in *.wav) [ -f "$_arg" ] && _conflicts=$(( _conflicts + 1 )) ;; esac
+        done
+        if [ "$_conflicts" -gt 0 ]; then
+            echo
+            echo -e "${RED}Output folder already contains ${NC}$_conflicts${YELLOW} matching${RED} WAV file(s):\n${NC}$OUT_REC_DIR"
+            echo -en "\n${YELLOW}Overwrite? ${GRAY}[${NC}y${GRAY}/${GREEN}N${GRAY}]${YELLOW}:${NC} "
+            read -r -n1 ans; echo
+            case "$ans" in [yY]) ;; *) echo -e "${GRAY}  Skipping $REC_NAME${NC}"; continue ;; esac
         fi
     fi
 
