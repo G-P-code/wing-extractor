@@ -368,14 +368,15 @@ else
         fi
 
         rec_len=$(format_duration "$rec_secs")
-        printf " %2d) %-15s ${CYAN}%s${NC}  (%s)\n" \
+        printf " %2d${GRAY})${NC} %-15s ${GRAY}%s${NC}  (%s)\n" \
             "$i" "$(basename "$d")" "$rec_len" "$ts"
         i=$(( i + 1 ))
     done
 
     echo
-    echo " a) process ALL"
+    echo -e "  a${GRAY})${NC} process ALL"
     echo
+    echo -e "  ${GRAY}Enter number(s) separated by commas, e.g. ${NC}1,3${GRAY} or ${NC}a${GRAY} for all${NC}"
     echo -en "${YELLOW}Selection:${NC} "
     read -r sel
 
